@@ -25,17 +25,20 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+//	Get All users
+	@GetMapping
+	public List<User> getAllUsers() {
+		return userService.getAllUsers();
+	}
+
+//	 Save user
 	@PostMapping
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		User savedUser = userService.saveUser(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 	}
 
-	@GetMapping
-	public List<User> getAllUsers() {
-		return userService.getAllUsers();
-	}
-
+//	Get User by id
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
 		Optional<User> user = userService.getUserById(id);
@@ -57,6 +60,7 @@ public class UserController {
 
 	}
 
+//	Delete user by id
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
 		if (userService.getUserById(id).isPresent()) {
