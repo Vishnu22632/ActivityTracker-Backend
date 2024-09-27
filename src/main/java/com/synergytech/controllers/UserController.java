@@ -1,6 +1,5 @@
 package com.synergytech.controllers;
 
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,19 +30,26 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping
-	public ResponseEntity<Page<User>> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-		Page<User> users = userService.gerUsers(PageRequest.of(page, size));
+	public ResponseEntity<Page<User>> getAllUsers(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size, @RequestParam(required = false) Long id,
+			@RequestParam(required = false) String fullName, @RequestParam(required = false) String email,
+			@RequestParam(required = false) String address) {
+		Page<User> users = userService.getUsersWithFilters(id, fullName, email, address, PageRequest.of(page, size));
 		return ResponseEntity.ok(users);
 	}
-	
 
-	
+//	@GetMapping
+//	public ResponseEntity<Page<User>> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+//		Page<User> users = userService.gerUsers(PageRequest.of(page, size));
+//		return ResponseEntity.ok(users);
+//	}
+
 ////	Get All users
 //	@GetMapping
 //	public List<User> getAllUsers() {
 //		return userService.getAllUsers();
 //	}
-	
+
 //	 Save user
 	@PostMapping
 	public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -84,23 +90,3 @@ public class UserController {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

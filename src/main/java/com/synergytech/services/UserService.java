@@ -17,10 +17,13 @@ public class UserService {
 	private UserRepository userRepository;
 	
 	
-	public Page<User> gerUsers(Pageable pageable){
-		return userRepository.findAll(pageable);
+//	public Page<User> gerUsers(Pageable pageable){
+//		return userRepository.findAll(pageable);
+//	}
+//	
+	public Page<User> getUsersWithFilters(Long id, String fullName,String email,String address,Pageable pageable){
+		return userRepository.findByFilters(id,fullName,email,address,pageable);
 	}
-	
 	
 
 //	public List<User> getAllUsers() {
