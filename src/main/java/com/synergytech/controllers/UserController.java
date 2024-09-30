@@ -29,26 +29,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping
-	public ResponseEntity<Page<User>> getAllUsers(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "5") int size, @RequestParam(required = false) Long id,
-			@RequestParam(required = false) String fullName, @RequestParam(required = false) String email,
-			@RequestParam(required = false) String address) {
-		Page<User> users = userService.getUsersWithFilters(id, fullName, email, address, PageRequest.of(page, size));
-		return ResponseEntity.ok(users);
-	}
-
-//	@GetMapping
-//	public ResponseEntity<Page<User>> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-//		Page<User> users = userService.gerUsers(PageRequest.of(page, size));
-//		return ResponseEntity.ok(users);
-//	}
-
-////	Get All users
-//	@GetMapping
-//	public List<User> getAllUsers() {
-//		return userService.getAllUsers();
-//	}
 
 //	 Save user
 	@PostMapping
@@ -57,6 +37,9 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 	}
 
+	
+	
+	
 //	Get User by id
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
@@ -64,6 +47,20 @@ public class UserController {
 		return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
 	}
+	
+	
+	
+	@GetMapping
+	public ResponseEntity<Page<User>> getAllUsers(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "5") int size, @RequestParam(required = false) Long id,
+			@RequestParam(required = false) String fullName, @RequestParam(required = false) String email,
+			@RequestParam(required = false) String address) {
+		Page<User> users = userService.getUsersWithFilters(id, fullName, email, address, PageRequest.of(page, size));
+		return ResponseEntity.ok(users);
+	}
+	
+	
+	
 
 //		Update user by id
 	@PutMapping("/{id}")
