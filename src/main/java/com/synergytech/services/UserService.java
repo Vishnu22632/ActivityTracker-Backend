@@ -1,5 +1,6 @@
 package com.synergytech.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,11 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	
-
-	
-	
 
 	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
 
-	
 	
 	public Page<User> getUsersWithFilters(Long id, String fullName,String email,String address,Pageable pageable){
 		return userRepository.findByFilters(id,fullName,email,address,pageable);
