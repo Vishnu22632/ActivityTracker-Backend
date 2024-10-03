@@ -12,27 +12,27 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="task")
+@Table(name = "task")
 public class Task {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="task_id")
+	@Column(name = "task_id")
 	private Long id;
-	@Column(name="task_name")
+	@Column(name = "task_name")
 	private String name;
 	@Enumerated(EnumType.STRING)
-	@Column(name="task_status")
+	@Column(name = "task_status")
 	private TaskStatus status;
-	@Column(name="task_desc")
+	@Column(name = "task_desc")
 	private String description;
-	
+
 	@ManyToOne
-	@JoinColumn(name="project_id")
+	@JoinColumn(name = "project_id")
 	private Project project;
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id") // Join column to establish the foreign key
 	private User assignedUser;
 
 	public Task() {
@@ -103,11 +103,5 @@ public class Task {
 		return "Task [id=" + id + ", name=" + name + ", status=" + status + ", description=" + description
 				+ ", project=" + project + ", assignedUser=" + assignedUser + "]";
 	}
-	
-	
-	
-	
-	
-	
 
 }

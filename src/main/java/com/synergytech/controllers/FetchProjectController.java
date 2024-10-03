@@ -11,25 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.synergytech.entities.Project;
-import com.synergytech.entities.User;
 import com.synergytech.repositories.ProjectRepository;
-import com.synergytech.repositories.UserRepository;
-
 
 @CrossOrigin("http://localhost:5173/")
 @RestController
-@RequestMapping("/api/all")
-public class FetchUserController {
+@RequestMapping("/api/all/projects")
+public class FetchProjectController {
 	
 	@Autowired
-	private UserRepository userRepository;
-
+	private ProjectRepository projectRepository;
 	
-		@GetMapping
-		public ResponseEntity<List<User>> getUsers() {
-		    List<User> users = userRepository.findAll();
-		    return new ResponseEntity<>(users, HttpStatus.OK);
-		}
-	
-		
+	@GetMapping
+	public ResponseEntity<List<Project>> getProjects(){
+		List<Project> projects = projectRepository.findAll();
+		return new ResponseEntity<>(projects, HttpStatus.OK);
+	}
 }

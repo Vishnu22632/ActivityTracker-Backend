@@ -1,6 +1,5 @@
 package com.synergytech.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,12 +59,6 @@ public class UserController {
 		return ResponseEntity.ok(users);
 	}
 	
-	
-//	@GetMapping
-//	public ResponseEntity<List<User>> getUsers(){
-//		List<User> users=userService.getUsers();
-//		return new ResponseEntity<>(users,HttpStatus.OK);
-//	}
 
 
 //		Update user by id
